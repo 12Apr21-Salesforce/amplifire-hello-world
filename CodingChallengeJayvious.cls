@@ -41,6 +41,7 @@ public class CodingChallengeJayvious{
      * Don't use the sort() method... that would be lame.
     */
     public static List<Integer> sortList( List<Integer> intList ) {
+       
 
 
     }
@@ -144,6 +145,25 @@ public class CodingChallengeJayvious{
      *          question marks between those numbers
     */
     public static Boolean questionMarks(String str) {
+        Integer cnt = 0; // cretaing a counter to check each '?' in the string
+        for(Integer i = 0; i < str.length(); i++){ //loop through string
+            String holder = str.substring(i, i+1); //holder for current character the we are on
+            if(holder == '?'){ // check if the question mark is out current char
+                cnt = cnt + 1;// yes increase cnt
+                if(cnt == 3){// check the cnt if it is = 3
+                    break;// end the search after this because we only need at least one pair
+                }
+            }
+            if(holder != '?'){ // as soon as the char is not '?' we will manipulte the cnt
+                if(cnt > 0){ //if the cnt has been changed from 0 (as in greater than 0) then we will change cnt back to 0 because they need to be consecutive
+                cnt = 0;
+                }
+            } 
+        }
+        if(cnt == 3){ //if the break happened this test case will always happen
+            return true;
+        }
+        return false;//if the above if statement is false then this will always return
     }
 
     /*
