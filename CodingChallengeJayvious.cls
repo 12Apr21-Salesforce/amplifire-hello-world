@@ -42,8 +42,25 @@ public class CodingChallengeJayvious{
     */
     public static List<Integer> sortList( List<Integer> intList ) {
         List<Integer> sorted = new List<Integer>();
-        
-
+        while(intList.size() != 0){ //while the given list is not empty
+            if(intList.size() == 1){//base case of if the given list only has one item left in list
+            //then we can just add that last item to our sorted list assuming that everything inside is correct
+                sorted.add(intList.get(0));
+                break;
+            }
+            Integer indexH = 0; //index holder
+            Integer min  = intList.get(0); //current min
+            for(Integer i = 0; i < intList.size(); i++){//looping through the given list
+                Integer tester = intList.get(i);
+                if(tester < min){//testing against min to see if there is a smaller number; change min if true
+                    indexH = i;//assign the index of the new min for removal later
+                    min = tester;
+                }
+            }
+            intList.remove(indexH);//remove new min
+            sorted.add(min);//adding min to sorted list
+        }
+        return sorted;
     }
 
     /*
@@ -70,11 +87,13 @@ public class CodingChallengeJayvious{
     */
     public static List<Integer> rotateLeftNTimes( List<Integer> nList, Integer n) {
         while(n != 0){
-            List<Integer> holder =  new List<Integer>();
+            List<Integer> holder =  new List<Integer>(); //holder for new list rotations 
             for(Integer i = 1; i < nList.size(); i++){
-                holder.add(nList.get(i));
+                holder.add(nList.get(i));//adding from the second point of our list
             }
-            holder.add(nList.get(0));
+            holder.add(nList.get(0));//adding what was in the beginning of the list to the back of holder
+            //channging the value of nList for return purposes and 
+            //for the next iteration of the while loop
             nList = holder;
             n = n - 1;
         }
@@ -185,6 +204,15 @@ public class CodingChallengeJayvious{
      *          (which are 2, 4, 6, 8, 10, and 12)
     */
     public static Integer multipleCounter(Integer firstNum, Integer secondNum, Integer n) {
+        Integer i = firstNum;
+        Integer ctr = 0;
+        while(i <= secondNum){
+            if(Math.mod(i, n) == 0){
+                ctr = ctr + 1;
+            }
+            i = i + 1;
+        }
+        return ctr;
     }
     
     /*
