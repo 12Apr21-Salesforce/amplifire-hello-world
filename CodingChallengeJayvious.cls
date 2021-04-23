@@ -23,7 +23,7 @@ public class CodingChallengeJayvious{
      * Input: 10    Output: 55
     */
     public static Integer nFibonacci( Integer n ){
-        if(n == 1){
+        if(n == 1){ //Two base cases which is basically the starting point of each fib sequence
             return 1;
         }
         if(n == 0){
@@ -41,8 +41,8 @@ public class CodingChallengeJayvious{
      * Don't use the sort() method... that would be lame.
     */
     public static List<Integer> sortList( List<Integer> intList ) {
-       
-
+        List<Integer> sorted = new List<Integer>();
+        
 
     }
 
@@ -55,7 +55,7 @@ public class CodingChallengeJayvious{
     */
     public static Integer nFactorial( Integer n) {
         if (n < 2){ 
-            return 1; //anything less than  2 will be equla to 1 as 1! = 1 and 0! = 1
+            return 1; //anything less than 2 will be equla to 1 e.g 1! = 1 and 0! = 1
         }
         return nFactorial(n-1) * n; //whatever is returned will be multipled by what n is currently
     }
@@ -69,7 +69,16 @@ public class CodingChallengeJayvious{
      * Input: [1,2,3,4,5], 3    Output: [4,5,1,2,3]
     */
     public static List<Integer> rotateLeftNTimes( List<Integer> nList, Integer n) {
-
+        while(n != 0){
+            List<Integer> holder =  new List<Integer>();
+            for(Integer i = 1; i < nList.size(); i++){
+                holder.add(nList.get(i));
+            }
+            holder.add(nList.get(0));
+            nList = holder;
+            n = n - 1;
+        }
+        return nList;
     }
 
     /*
