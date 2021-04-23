@@ -1,5 +1,5 @@
-    Lead off your class with the following comment, filled out with 
-    your information.
+    //Lead off your class with the following comment, filled out with 
+    //your information.
 
     /////////////////////////////////////////////////////////////////
     //
@@ -11,9 +11,9 @@
     //
     /////////////////////////////////////////////////////////////////
 
-    Write the following methods in a class called P0B. 
-    Note: The method signatures are given.
-
+    //Write the following methods in a class called P0B. 
+    //Note: The method signatures are given.
+public class CodingChallengeJayvious{
     /*
      * 1. Return the nth Fibonacci number
      * Test Cases:
@@ -23,6 +23,7 @@
      * Input: 10    Output: 55
     */
     public static Integer nFibonacci( Integer n ){
+
         
 
     }
@@ -169,3 +170,4 @@
     */
     public static Integer palindromicity(String str) {
     }
+}
