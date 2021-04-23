@@ -12,7 +12,7 @@
     /////////////////////////////////////////////////////////////////
 
     //Write the following methods in a class called P0B. 
-    //Note: The method signatures are given.
+    //Note: The method signatures are given.s
 public class CodingChallengeJayvious{
     /*
      * 1. Return the nth Fibonacci number
@@ -23,9 +23,13 @@ public class CodingChallengeJayvious{
      * Input: 10    Output: 55
     */
     public static Integer nFibonacci( Integer n ){
-
-        
-
+        if(n == 1){
+            return 1;
+        }
+        if(n == 0){
+            return 0;
+        }
+        return nFibonacci(n-1) + nFibonacci(n-2);
     }
 
     /*
@@ -38,6 +42,7 @@ public class CodingChallengeJayvious{
     */
     public static List<Integer> sortList( List<Integer> intList ) {
 
+
     }
 
     /*
@@ -48,8 +53,10 @@ public class CodingChallengeJayvious{
      * Input: 3    Output: 6
     */
     public static Integer nFactorial( Integer n) {
-        
-
+        if (n < 2){ 
+            return 1; //anything less than  2 will be equla to 1 as 1! = 1 and 0! = 1
+        }
+        return nFactorial(n-1) * n; //whatever is returned will be multipled by what n is currently
     }
 
     /*
