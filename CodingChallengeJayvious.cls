@@ -119,13 +119,17 @@ public class CodingChallengeJayvious{
      * Return true if balanced
      * Return false if not balanced
     */
-    public static Boolean bracketsAreBalanced( String s ) {
+ public static Boolean bracketsAreBalanced( String s ) {
         List<String> holder = new List<String>();
         String hString = null;
         Boolean balanced = false;
         if(s.length() <= 1){
             return false;
         }
+     	String base = s.substring(s.length()-1);
+     	if(base == '{' || base == '(' || base == '['){
+            return false;
+     	}
 
         for(Integer i = 0; i < s.length(); i++){
             String test = null;
@@ -149,6 +153,8 @@ public class CodingChallengeJayvious{
                         if(!holder.isEmpty()){
                         	hString = holder.get(holder.size()-1);
                         	holder.remove(holder.size()-1);
+                        }else{
+                            hString = null;
                         }
                         balanced = true;
                     }else{
@@ -161,6 +167,8 @@ public class CodingChallengeJayvious{
                        if(!holder.isEmpty()){
                         	hString = holder.get(holder.size()-1);
                         	holder.remove(holder.size()-1);
+                        }else{
+                            hString = null;
                         }
                         balanced = true;
                     }else{
@@ -173,6 +181,8 @@ public class CodingChallengeJayvious{
                         if(!holder.isEmpty()){
                         	hString = holder.get(holder.size()-1);
                         	holder.remove(holder.size()-1);
+                        }else{
+                            hString = null;
                         }
                         balanced = true;
                     }else{
@@ -184,6 +194,23 @@ public class CodingChallengeJayvious{
             }
      if(!holder.isEmpty()){
          return false;
+     }
+     switch on hString{
+         when '['{
+             if(base != ']'){
+                 return false;
+             }
+         }
+         when '{'{
+             if(base != '{'){
+                 return false;
+             }
+         }
+         when '('{
+             if(base != ')'){
+                 return false;
+             }
+         }
      }
      return balanced;
 
