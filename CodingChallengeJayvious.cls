@@ -120,8 +120,75 @@ public class CodingChallengeJayvious{
      * Return false if not balanced
     */
     public static Boolean bracketsAreBalanced( String s ) {
+        List<String> holder = new List<String>();
+        String hString = null;
+        Boolean balanced = false;
+        if(s.length() <= 1){
+            return false;
+        }
 
-    }
+        for(Integer i = 0; i < s.length(); i++){
+            String test = null;
+            if(i+1 == s.length()){
+                test = s.substring(i);
+            }else{
+                test = s.substring(i, i+1);
+            }
+
+            switch on test {
+                when '(', '{', '[' {
+                    if(hString != null){
+                        holder.add(hString);
+                        hString = test;
+                    }else{
+                        hString = test;
+                    }
+                }
+                when ')'{
+                    if(hString == '('){
+                        if(!holder.isEmpty()){
+                        	hString = holder.get(holder.size()-1);
+                        	holder.remove(holder.size()-1);
+                        }
+                        balanced = true;
+                    }else{
+                        return false;
+                        //break;
+                    }
+                }
+                when ']'{
+                    if(hString == '['){
+                       if(!holder.isEmpty()){
+                        	hString = holder.get(holder.size()-1);
+                        	holder.remove(holder.size()-1);
+                        }
+                        balanced = true;
+                    }else{
+                        return false;
+                        //break;
+                    }
+                }
+                when '}'{
+                    if(hString == '{'){
+                        if(!holder.isEmpty()){
+                        	hString = holder.get(holder.size()-1);
+                        	holder.remove(holder.size()-1);
+                        }
+                        balanced = true;
+                    }else{
+                        return false;
+                        //break;
+                    }
+                }
+                }
+            }
+     if(!holder.isEmpty()){
+         return false;
+     }
+     return balanced;
+
+  }
+
 
     /* You should NOT be submitting answers that you find online. You will be expected to be able to defend any of these solutions without notice. */
 
@@ -174,25 +241,48 @@ public class CodingChallengeJayvious{
     */
     public static Boolean questionMarks(String str) {
         Integer cnt = 0; // cretaing a counter to check each '?' in the string
-        for(Integer i = 0; i < str.length(); i++){ //loop through string
-            String holder = str.substring(i, i+1); //holder for current character the we are on
-            if(holder == '?'){ // check if the question mark is out current char
-                cnt = cnt + 1;// yes increase cnt
-                if(cnt == 3){// check the cnt if it is = 3
-                    break;// end the search after this because we only need at least one pair
+        Integer fNum = 0;
+        Integer sNum = 0;
+        Boolean fPick = false;
+        Boolean lPick = false;
+
+          for(Integer i = 0; i < str.length(); i++){ //loop through string
+            String holder = str.substring(i, i+1);
+            if(fPick == true && lPick == true){
+                Integer s = fNum + lNum;
+                if(s == 10){
+                    if(cnt == 3){
+                        break;
+                    }
+                }else{
+                    cnt = 0;
+                    fPick = false;
+                    lPick =  false;
+                    fNum = 0;
+                    sNum = 0
                 }
             }
-            if(holder != '?'){ // as soon as the char is not '?' we will manipulte the cnt
-                if(cnt > 0){ //if the cnt has been changed from 0 (as in greater than 0) then we will change cnt back to 0 because they need to be consecutive
-                cnt = 0;
-                }
-            } 
+            if(cnt > 3){
+                break;
+            }
+            if(holder.isNumeric() && fPick != true){
+                fPick = true;
+                fNum  = Integer.valueOf(holder);
+            }
+            else if(holde.isNumeric() && lPick != true){
+                lPick = true;
+                lNum = Integer.valueOf(holder);
+                
+            }
+            if(holder == '?' && fPick == true){
+                cnt = cnt + 1;
+            }
+           
         }
-        if(cnt == 3){ //if the break happened this test case will always happen
-            return true;
-        }
-        return false;//if the above if statement is false then this will always return
+
+      
     }
+
 
     /*
      *   10. multipleCounter returns the number of multiples of the Integer n that exist in the inclusive range [firstNum, secondNum].
