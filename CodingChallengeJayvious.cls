@@ -120,14 +120,14 @@ public class CodingChallengeJayvious{
      * Return false if not balanced
     */
  public static Boolean bracketsAreBalanced( String s ) {
-        List<String> holder = new List<String>();
-        String hString = null;
+        List<String> holder = new List<String>();//holds every open bracket that we have not found a closer for 
+        String hString = null;//is out open bracket
         Boolean balanced = false;
-        if(s.length() <= 1){
+        if(s.length() <= 1){//base case: if string is less than one then there is no way it would be balanced
             return false;
         }
      	String base = s.substring(s.length()-1);
-     	if(base == '{' || base == '(' || base == '['){
+     	if(base == '{' || base == '(' || base == '['){//base case: if the string ends with a open bracket not balanced
             return false;
      	}
 
@@ -195,7 +195,7 @@ public class CodingChallengeJayvious{
      if(!holder.isEmpty()){
          return false;
      }
-     switch on hString{
+     switch on hString{//final test: if we make it here then there may be case where the string is false but has yet to been caught. we use this switch statment to ensure that hstring does have a closer, if not return false
          when '['{
              if(base != ']'){
                  return false;
@@ -230,6 +230,24 @@ public class CodingChallengeJayvious{
      *     Update the Size__c field on each account to reflect the amount of employees in the Account.
     */
     public static void updateAccountSize( ) {
+        List<Account> aSize = [SELECT Size__c, NumberOfEmployees FROM Account];
+        for(Integer i = 0; i < aSize.size(); i++){
+            Account aH = aSize.get(i);
+            Integer numE = aH.NumberOfEmployees;
+            if(numE == null){
+                continue;
+            }
+            else if(numE >= 1 && numE <= 1000){
+                aH.Size__c = 'small';
+            }
+            else if(numE >= 1001 && numE <= 10000){
+                aH.Size__c = 'medium';
+            }
+            else{
+                aH.Size__c = 'large';
+            }
+        }
+        update aSize;
 
     }
 
@@ -239,18 +257,26 @@ public class CodingChallengeJayvious{
      * Converted' and their description should display the message, "We are no longer doing 
      * business in California."
      */
-    public static void updateCALeads( ) {
-
+     public static void updateCALeads( ) {
+         List<Lead> caLead = [SELECT Address, Status, Description FROM Lead WHERE DISTANCE(Address, GEOLOCATION(37.0321592,-123.7983497), 'mi') = 1];
+         for (Lead l : caLead){
+             l.Status = 'Closed - Not Converted';
+             l.Description = 'We are no longer doing business in California.';
+         }
+         update caLead;
     }
-
     /*
      * 8. Create a method that will find all Opportunities which have already passed their Close Date 
      * and have a Stage field that is not 'Closed Won'. Since they have passed their Close Date and 
      * they are not marked as 'Closed Won', they should be marked as 'Closed Lost'.
      */
-    public static void closePastDueOpportunities( ) {
-
-    }
+      public static void closePastDueOpportunities( ) {
+           List<Opportunity> opps = [SELECT CloseDate, StageName FROM Opportunity WHERE StageName != 'Closed Won' AND CloseDate < TODAY];
+    		for(Opportunity o : opps){
+        		o.StageName = 'Closed Lost';
+    		}
+         update opps;
+    } 
 
     /*  
      *  9. questionMarks declares the str parameter, which can have numbers, letters, and question marks.
@@ -350,5 +376,6 @@ public class CodingChallengeJayvious{
      *                                    'aba' 'bbb' 'abba' 'b' 'aba' is the greedy answer.
     */
     public static Integer palindromicity(String str) {
+
     }
 }
