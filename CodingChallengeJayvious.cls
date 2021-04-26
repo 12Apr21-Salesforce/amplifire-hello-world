@@ -91,7 +91,7 @@ public class CodingChallengeJayvious{
             for(Integer i = 1; i < nList.size(); i++){
                 holder.add(nList.get(i));//adding from the second point of our list
             }
-            holder.add(nList.get(0));//adding what was in the beginning of the list to the back of holder
+            holder.add(nList.get(0));//adding what was in the beginning of the orignal list to the back of holder
             //channging the value of nList for return purposes and 
             //for the next iteration of the while loop
             nList = holder;
@@ -121,7 +121,7 @@ public class CodingChallengeJayvious{
     */
  public static Boolean bracketsAreBalanced( String s ) {
         List<String> holder = new List<String>();//holds every open bracket that we have not found a closer for 
-        String hString = null;//is out open bracket
+        String hString = null;//is our open bracket
         Boolean balanced = false;
         if(s.length() <= 1){//base case: if string is less than one then there is no way it would be balanced
             return false;
@@ -139,7 +139,7 @@ public class CodingChallengeJayvious{
                 test = s.substring(i, i+1);
             }
 
-            switch on test {
+            switch on test { //whatever test is we switch on that. 
                 when '(', '{', '[' {
                     if(hString != null){
                         holder.add(hString);
@@ -192,10 +192,11 @@ public class CodingChallengeJayvious{
                 }
                 }
             }
-     if(!holder.isEmpty()){
+     if(!holder.isEmpty()){ //if we make it out of the loop and holder is not empty then string != balanced
          return false;
      }
-     switch on hString{//final test: if we make it here then there may be case where the string is false but has yet to been caught. we use this switch statment to ensure that hstring does have a closer, if not return false
+     switch on hString{
+         /*final test: if we make it here then there may be a case where the string is false but has yet to been caught. we use this switch statment to ensure that hstring does have a closer, if not return false*/
          when '['{
              if(base != ']'){
                  return false;
@@ -294,7 +295,7 @@ public class CodingChallengeJayvious{
     */
      public static Boolean questionMarks(String str) {
         Integer cnt = 0; // cretaing a counter to check each '?' in the string
-        Integer fNum = 0;
+        Integer fNum = 0; 
         Integer lNum = 0;
         Boolean fPick = false;
         Boolean lPick = false;
