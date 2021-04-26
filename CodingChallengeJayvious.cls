@@ -292,37 +292,27 @@ public class CodingChallengeJayvious{
      *      str = "a?7??s?3r1?????5" => questionMarks returns true because there's at least one pair of numbers that sum to 10 (7 and 3) and 3
      *          question marks between those numbers
     */
-    public static Boolean questionMarks(String str) {
+     public static Boolean questionMarks(String str) {
         Integer cnt = 0; // cretaing a counter to check each '?' in the string
         Integer fNum = 0;
-        Integer sNum = 0;
+        Integer lNum = 0;
         Boolean fPick = false;
         Boolean lPick = false;
+        Boolean allG = false;
 
-          for(Integer i = 0; i < str.length(); i++){ //loop through string
-            String holder = str.substring(i, i+1);
-            if(fPick == true && lPick == true){
-                Integer s = fNum + lNum;
-                if(s == 10){
-                    if(cnt == 3){
-                        break;
-                    }
-                }else{
-                    cnt = 0;
-                    fPick = false;
-                    lPick =  false;
-                    fNum = 0;
-                    sNum = 0
-                }
+          for(Integer i = 0; i < str.length(); i++){ 
+            String holder = null;
+            if(i+1 == str.length()){
+                holder = str.substring(i);
+            }else{
+                holder = str.substring(i, i+1);
             }
-            if(cnt > 3){
-                break;
-            }
+            
             if(holder.isNumeric() && fPick != true){
                 fPick = true;
                 fNum  = Integer.valueOf(holder);
             }
-            else if(holde.isNumeric() && lPick != true){
+            else if(holder.isNumeric() && lPick != true){
                 lPick = true;
                 lNum = Integer.valueOf(holder);
                 
@@ -330,10 +320,21 @@ public class CodingChallengeJayvious{
             if(holder == '?' && fPick == true){
                 cnt = cnt + 1;
             }
-           
+            if(fPick == true && lPick == true){
+                Integer s = fNum + lNum;
+                if(s == 10 && cnt == 3){
+                    allG = true;
+                    //break;
+                }else{
+                    cnt = 0;
+                    fPick = false;
+                    lPick =  false;
+                    fNum = 0;
+                    lNum = 0;
+                }
+            }
         }
-
-      
+      return allG;
     }
 
 
