@@ -55,9 +55,8 @@
                     intList[i] = temp;
                 }
             }
-            return intList;
         }
-    }
+        return intList;    }
 
     /*
      * 3. Return the factorial of n.
