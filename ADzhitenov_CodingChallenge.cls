@@ -575,6 +575,6 @@ System.debug(ADzhitenov_CodingChallenge.rotateLeftNTimes(testList3, 3));
 
 
 
-        return NULL;        
+        return palindromes.size();        
     }
 }
