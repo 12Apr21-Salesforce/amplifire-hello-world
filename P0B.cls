@@ -127,7 +127,44 @@
      * Return false if not balanced
     */
     public static Boolean bracketsAreBalanced( String s ) {
-
+        <String> [] leftBrackets = new List<String>();
+        int compareAtIndex = 0; 
+        for(int i = 0; i < s.length; i++) {
+            if (s.charAt(i) == "(" || s.charAt(i) == "[" || s.charAt(i) == "{") {
+                leftBrackets[compareAtIndex] = s.charAt(i);
+                compareAtIndex++;
+            }
+            else {
+                if (compareAtIndex == 0) {
+                    return false;
+                }
+                else {
+                    String leftBracket = leftBrackets[compareAtIndex - 1];
+                    if (s.charAt(i) == ")") {
+                        if (leftBracket != "(") {
+                            return false;
+                        }
+                    }
+                    else if (s.charAt(i) == "]") {
+                        if (leftBracket != "[") {
+                            return false;
+                        }
+                    }
+                    else if (s.charAt(i) == "}") {
+                        if (leftBracket != "{") {
+                            return false;
+                        }
+                    }
+                    compareAtIndex--;
+                }
+            }
+        }
+        if (compareAtIndex == 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     /* You should NOT be submitting answers that you find online. You will be expected to be able to defend any of these solutions without notice. */
